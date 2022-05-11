@@ -44,6 +44,24 @@ class Play extends Phaser.Scene {
             frames: this.anims.generateFrameNumbers('explosion', { start: 0, end: 9, first: 0}),
             frameRate: 30
         });
+
+        // initialize score
+        this.p1Score = 0;
+
+        // display score
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 100
+        }
+        this.scoreLeft = this.add.text(borderUISize + borderPadding, borderUISize + borderPadding*2, this.p1Score, scoreConfig);
     }
 
     update() {
@@ -55,7 +73,7 @@ class Play extends Phaser.Scene {
         this.ship01.update();               // update spaceships (x3)
         this.ship02.update();
         this.ship03.update();
-        
+
         // check collisions
         if(this.checkCollision(this.p1Rocket, this.ship03)) {
             this.p1Rocket.reset();
